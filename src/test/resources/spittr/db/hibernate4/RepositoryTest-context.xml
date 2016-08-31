@@ -12,7 +12,7 @@
     <context:component-scan base-package="spittr.db.hibernate4"/>
 
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager"
-          c:_0-ref="sessionFactory"/>
+        c:_0-ref="sessionFactory"/>
 
     <jdbc:embedded-database id="dataSource" type="H2">
         <jdbc:script location="spittr/db/hibernate4/schema.sql"/>

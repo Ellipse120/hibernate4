@@ -1,6 +1,7 @@
 package spittr.db.hibernate4;
 
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +14,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 
-import javax.inject.Inject;
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.util.Properties;
 
 /**
@@ -23,15 +24,17 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @ComponentScan
-public class RepositoryTestConfig implements TransactionManagementConfigurer{
+public class RepositoryTestConfig implements TransactionManagementConfigurer {
 
-    @Inject
+    @Autowired
     private SessionFactory sessionFactory;
 
     public PlatformTransactionManager annotationDrivenTransactionManager() {
         System.out.println(sessionFactory);
+
         HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
         hibernateTransactionManager.setSessionFactory(sessionFactory);
+
         return hibernateTransactionManager;
     }
 
@@ -47,7 +50,7 @@ public class RepositoryTestConfig implements TransactionManagementConfigurer{
             localSessionFactoryBean.afterPropertiesSet();
             SessionFactory object = localSessionFactoryBean.getObject();
             return object;
-        } catch (Exception e) {
+        } catch (IOException e) {
             return null;
         }
     }

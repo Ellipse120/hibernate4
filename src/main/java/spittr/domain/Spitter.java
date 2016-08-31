@@ -1,4 +1,4 @@
-package Spitter.domain;
+package spittr.domain;
 
 import javax.persistence.*;
 
@@ -17,6 +17,30 @@ public class Spitter {
 
     @Column(name = "username")
     private String username;
+
+    public long getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public boolean isUpdateByEmail() {
+        return updateByEmail;
+    }
 
     @Column(name = "password")
     private String password;

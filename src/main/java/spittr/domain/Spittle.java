@@ -1,4 +1,4 @@
-package Spitter.domain;
+package spittr.domain;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,7 +17,7 @@ public class Spittle {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "spitter")
+    @JoinColumn(name = "spittr")
     private Spitter spitter;
 
     @Column

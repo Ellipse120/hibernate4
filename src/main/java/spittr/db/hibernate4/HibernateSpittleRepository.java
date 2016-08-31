@@ -1,5 +1,8 @@
 package spittr.db.hibernate4;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 import spittr.db.SpittleRepository;
 import spittr.domain.Spittle;
 import org.hibernate.Session;
@@ -34,7 +37,8 @@ public class HibernateSpittleRepository implements SpittleRepository{
     }
 
     private List<Spittle> findAll() {
-        return null;
+
+        return (List<Spittle>) spittleCriteria().list();
     }
 
     public List<Spittle> findRecent() {
@@ -42,7 +46,8 @@ public class HibernateSpittleRepository implements SpittleRepository{
     }
 
     public List<Spittle> findRecent(int count) {
-        return null;
+
+        return (List<Spittle>) spittleCriteria().setMaxResults(count).list();
     }
 
     public Spittle findOne(long id) {
@@ -57,11 +62,16 @@ public class HibernateSpittleRepository implements SpittleRepository{
     }
 
     public List<Spittle> findBySpitterId(long spitterId) {
-        return null;
+
+        return spittleCriteria().add(Restrictions.eq("spitter.id", spitterId)).list();
     }
 
     public void delete(long id) {
         currentSession().delete(findOne(id));
+    }
+
+    private Criteria spittleCriteria(){
+        return currentSession().createCriteria(Spittle.class).addOrder(Order.desc("postedTime"));
     }
 
 }

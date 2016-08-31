@@ -14,6 +14,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 
+import javax.inject.Inject;
 import javax.sql.DataSource;
 import java.io.IOException;
 import java.util.Properties;
@@ -26,8 +27,18 @@ import java.util.Properties;
 @ComponentScan
 public class RepositoryTestConfig implements TransactionManagementConfigurer {
 
-    @Autowired
+    @Inject
     private SessionFactory sessionFactory;
+
+    @Bean
+    public DataSource dataSource() {
+        EmbeddedDatabaseBuilder embeddedDatabaseBuilder = new EmbeddedDatabaseBuilder();
+        embeddedDatabaseBuilder.setType(EmbeddedDatabaseType.H2);
+        embeddedDatabaseBuilder.addScript("spittr/db/hibernate4/schema.sql");
+        embeddedDatabaseBuilder.addScript("spittr/db/hibernate4/test-data.sql");
+        EmbeddedDatabase embeddedDatabase = embeddedDatabaseBuilder.build();
+        return embeddedDatabase;
+    }
 
     public PlatformTransactionManager annotationDrivenTransactionManager() {
         System.out.println(sessionFactory);
@@ -54,15 +65,4 @@ public class RepositoryTestConfig implements TransactionManagementConfigurer {
             return null;
         }
     }
-
-    @Bean
-    public DataSource dataSource() {
-        EmbeddedDatabaseBuilder embeddedDatabaseBuilder = new EmbeddedDatabaseBuilder();
-        embeddedDatabaseBuilder.setType(EmbeddedDatabaseType.H2);
-        embeddedDatabaseBuilder.addScript("spittr/db/hibernate4/schema.sql");
-        embeddedDatabaseBuilder.addScript("spittr/db/hibernate4/test-data.sql");
-        EmbeddedDatabase embeddedDatabase = embeddedDatabaseBuilder.build();
-        return embeddedDatabase;
-    }
-
 }

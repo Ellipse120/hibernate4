@@ -46,7 +46,7 @@ public class HibernateSpittleRepository implements SpittleRepository{
     }
 
     public Spittle findOne(long id) {
-        return (Spittle) currentSession().get(Spitter.class, id);
+        return (Spittle) currentSession().get(Spittle.class, id);
     }
 
     public Spittle save(Spittle spittle) {

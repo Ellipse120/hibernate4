@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
-import java.io.IOException;
 import java.util.Properties;
 
 /**

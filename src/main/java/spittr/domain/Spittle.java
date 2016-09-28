@@ -17,7 +17,7 @@ public class Spittle {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "spittr")
+    @JoinColumn(name = "spitter")
     private Spitter spitter;
 
     @Column
@@ -34,18 +34,18 @@ public class Spittle {
     }
 
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public Spitter getSpitter() {
-        return spitter;
+        return this.spitter;
     }
 
     public String getMessage() {
-        return message;
+        return this.message;
     }
 
     public Date getPostedTime() {
-        return postedTime;
+        return this.postedTime;
     }
 }

@@ -43,7 +43,7 @@ public class SpittleRepositoryTest {
         }
 
         {
-            List<Spittle> recent = spittleRepository.findRecent();
+            List<Spittle> recent = spittleRepository.findRecent(5);
             assertRecent(recent, 5);
         }
     }
@@ -53,12 +53,12 @@ public class SpittleRepositoryTest {
     public void findOne(){
         Spittle thirteen = spittleRepository.findOne(13);
         assertEquals(13, thirteen.getId().longValue());
-        assertEquals("Bonjour from Art", thirteen.getMessage());
+        assertEquals("Bonjour from Art!", thirteen.getMessage());
         assertEquals(1332682500000L, thirteen.getPostedTime().getTime());
-        assertEquals(4, thirteen.getSpitter().getId()); //
+        assertEquals(4, thirteen.getSpitter().getId().longValue());
         assertEquals("artnames", thirteen.getSpitter().getUsername());
         assertEquals("password", thirteen.getSpitter().getPassword());
-        assertEquals("Art Names", thirteen.getSpitter().getFullname());
+        assertEquals("Art Names", thirteen.getSpitter().getFullName());
         assertEquals("art@habuma.com", thirteen.getSpitter().getEmail());
         assertTrue(thirteen.getSpitter().isUpdateByEmail());
     }

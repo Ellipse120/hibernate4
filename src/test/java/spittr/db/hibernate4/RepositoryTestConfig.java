@@ -1,7 +1,6 @@
 package spittr.db.hibernate4;
 
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -61,6 +60,7 @@ public class RepositoryTestConfig implements TransactionManagementConfigurer {
             localSessionFactoryBean.afterPropertiesSet();
             SessionFactory object = localSessionFactoryBean.getObject();
             return object;
+
         } catch (IOException e) {
             return null;
         }

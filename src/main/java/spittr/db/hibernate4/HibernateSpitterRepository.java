@@ -1,5 +1,6 @@
 package spittr.db.hibernate4;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import spittr.db.SpitterRepository;
 import spittr.domain.Spitter;
 import spittr.domain.Spittle;
@@ -22,7 +23,7 @@ public class HibernateSpitterRepository implements SpitterRepository {
 
     private SessionFactory sessionFactory;
 
-    @Inject
+    @Autowired
     public HibernateSpitterRepository(SessionFactory sessionFactory) {
         this.sessionFactory=sessionFactory;
     }
@@ -38,7 +39,7 @@ public class HibernateSpitterRepository implements SpitterRepository {
 
     public Spitter save(Spitter spitter) {
         Serializable id = currentSession().save(spitter);
-        return new Spitter((Long) id, spitter.getUsername(),spitter.getPassword(),spitter.getFullname(),spitter.getEmail(),spitter.isUpdateByEmail());
+        return new Spitter((Long) id, spitter.getUsername(),spitter.getPassword(),spitter.getFullName(),spitter.getEmail(),spitter.isUpdateByEmail());
     }
 
     public Spitter findOne(long id) {

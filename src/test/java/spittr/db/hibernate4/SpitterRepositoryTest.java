@@ -53,33 +53,33 @@ public class SpitterRepositoryTest {
     @Test
     @Transactional
     public void findOne() {
-        assertEquals(0, spitterRepository.findOne(1L));
-        assertEquals(1, spitterRepository.findOne(2L));
-        assertEquals(2, spitterRepository.findOne(3L));
-        assertEquals(3, spitterRepository.findOne(4L));
+        assertSpitter(0, spitterRepository.findOne(1L));
+        assertSpitter(1, spitterRepository.findOne(2L));
+        assertSpitter(2, spitterRepository.findOne(3L));
+        assertSpitter(3, spitterRepository.findOne(4L));
     }
 
     @Test
     @Transactional
     public void save_newSpitter() {
         assertEquals(4, spitterRepository.count());
-        Spitter spitter = new Spitter(null, "newBee", "letmein", "New Bee", "newbee@habuma.com", true);
+        Spitter spitter = new Spitter( 1L,"newbee", "letmein", "New Bee", "newbee@habuma.com", true);
         Spitter saved = spitterRepository.save(spitter);
-        assertEquals(5, spitterRepository.save(spitter));
-        assertEquals(4, saved);
-        assertEquals(4, spitterRepository.findOne(5L));
+        assertEquals(5, spitterRepository.count());
+        assertSpitter(4, saved);
+        assertSpitter(4, spitterRepository.findOne(5L));
     }
 
     private static void assertSpitter(int expectedSpitterIndex, Spitter actual) {
-
+        assertSpitter(expectedSpitterIndex, actual, "Newbie");
     }
 
-    private static void assertSpittre(int expectedSpitterIndex, Spitter actual, String expectedStatus) {
+    private static void assertSpitter(int expectedSpitterIndex, Spitter actual, String expectedStatus) {
         Spitter expected = SPITTERS[expectedSpitterIndex];
         assertEquals(expected.getId(), actual.getId());
         assertEquals(expected.getUsername(), actual.getUsername());
         assertEquals(expected.getPassword(), actual.getPassword());
-        assertEquals(expected.getFullname(), actual.getFullname());
+        assertEquals(expected.getFullName(), actual.getFullName());
         assertEquals(expected.getEmail(), actual.getEmail());
         assertEquals(expected.isUpdateByEmail(), actual.isUpdateByEmail());
     }
@@ -89,11 +89,11 @@ public class SpitterRepositoryTest {
     @BeforeClass
     public static void before(){
         SPITTERS[0] = new Spitter(1L, "habuma", "password", "Craig Walls", "craig@habuma.com", false);
-        SPITTERS[0] = new Spitter(2L, "mwalls", "password", "Michael Walls", "mwalls@habuma.com", true);
-        SPITTERS[0] = new Spitter(3L, "chuck", "password", "Chuck Wagon", "chuck@habuma.com", false);
-        SPITTERS[0] = new Spitter(4L, "artnames", "password", "Art Names", "art@habuma.com", true);
-        SPITTERS[0] = new Spitter(5L, "newbee", "password", "New Bee", "newbee@habuma.com", true);
-        SPITTERS[0] = new Spitter(6L, "arthur", "letmein", "Arthur Names", "arthur@habuma.com", false);
+        SPITTERS[1] = new Spitter(2L, "mwalls", "password", "Michael Walls", "mwalls@habuma.com", true);
+        SPITTERS[2] = new Spitter(3L, "chuck", "password", "Chuck Wagon", "chuck@habuma.com", false);
+        SPITTERS[3] = new Spitter(4L, "artnames", "password", "Art Names", "art@habuma.com", true);
+        SPITTERS[4] = new Spitter(5L, "newbee", "password", "New Bee", "newbee@habuma.com", true);
+        SPITTERS[5] = new Spitter(4L, "arthur", "letmein", "Arthur Names", "arthur@habuma.com", false);
     }
 
 }

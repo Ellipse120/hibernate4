@@ -16,7 +16,7 @@
 
     <jdbc:embedded-database id="dataSource" type="H2">
         <jdbc:script location="spittr/db/hibernate4/schema.sql"/>
-        <jdbc:script location="spittr/db/hibernate4/test-date.sql"/>
+        <jdbc:script location="test-date.sql"/>
     </jdbc:embedded-database>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
